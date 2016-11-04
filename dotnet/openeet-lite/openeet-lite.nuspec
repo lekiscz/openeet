@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>openeet-lite</id>
+    <version>$version$</version>
+    <title>OpenEET-Lite</title>
+    <authors>OpenEET</authors>
+    <owners>OpenEET</owners>
+    <licenseUrl>https://github.com/lekiscz/openeet/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/lekiscz/openeet/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Komunikace s EET</description>
+    <copyright>Copyright 2016</copyright>
+    <tags>eet</tags>
+  </metadata>
+</package>
