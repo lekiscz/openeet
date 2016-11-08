@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -26,6 +27,13 @@ namespace UnitTests
     [TestClass]
     public class RegisterRequestTest
     {
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            // has to set specific culture, because some tests are testing culture-specific parsing of strings
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("cs-CZ");
+        }
+
         [TestMethod]
         public void BuilderTest()
         {
@@ -59,7 +67,8 @@ namespace UnitTests
             var request = GenerateBasicRequestWithoutCertificate();
             request.DatTrzby = DateTime.MinValue;
             var formatedData = request.FormatToBeSignedData();
-            Assert.AreEqual(formatedData, "CZ1212121218|1|POKLADNA01|1|0001-01-01T00:00:00+01:00|100.00");
+            // DateTime.MinValue string value has to be determined by function call because local environment could use different time zones
+            Assert.AreEqual(formatedData, "CZ1212121218|1|POKLADNA01|1|" + DateTime.MinValue.ToString("yyyy-MM-dd'T'HH:mm:sszzz") + "|100.00");
         }
 
         [TestMethod]
@@ -163,6 +172,7 @@ namespace UnitTests
         }
 
         [TestMethod]
+        [TestCategory("Online")]
         public async Task SendRequestTest()
         {
             EetRegisterRequest request = new EetRequestBuilder()

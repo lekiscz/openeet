@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -27,6 +28,13 @@ namespace UnitTests
     [TestClass]
     public class RequestBuilderTests
     {
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            // has to set specific culture, because some tests are testing culture-specific parsing of strings
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("cs-CZ");
+        }
+
         /// <summary>
         /// Test set methods.
         /// </summary>
