@@ -20,6 +20,7 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using openeet_lite;
 
@@ -31,8 +32,10 @@ namespace UnitTests
         [TestInitialize]
         public void TestInitialize()
         {
+            RSAPKCS1SHA256SignatureDescription.AddSupportForNET4();
+
             // has to set specific culture, because some tests are testing culture-specific parsing of strings
-            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("cs-CZ");
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("cs-CZ");
         }
 
         /// <summary>

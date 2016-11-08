@@ -123,6 +123,8 @@ namespace ConsoleTest
         // ReSharper disable once UnusedParameter.Local
         static void Main(string[] args)
         {
+            RSAPKCS1SHA256SignatureDescription.AddSupportForNET4();
+
             //SignAndSend();
 
             Task.WaitAll(SimpleRegistrationProcessTest());
