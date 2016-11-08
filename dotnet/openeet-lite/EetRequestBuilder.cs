@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright 2016 Jakub Cermoch and other contributors as 
+ * Copyright 2016 Jakub Cermoch and other contributors as
  * indicated by the @author tags.
  * Upravil Jakub Cermoch
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ namespace openeet_lite
         /// <summary>
         /// Prvni zaslani
         /// </summary>
-        /// 
+        ///
         Prvni = 1,
 
         /// <summary>
@@ -60,7 +60,6 @@ namespace openeet_lite
     /// </summary>
     public enum RezimEnum
     {
-
         /// <summary>
         /// Standardni rezim
         /// </summary>
@@ -77,7 +76,6 @@ namespace openeet_lite
     /// </summary>
     public class EetRequestBuilder
     {
-
         #region Properties
 
         /// <summary>
@@ -882,7 +880,7 @@ namespace openeet_lite
         /// <param name="val">The BKP.</param>
         /// <returns>This builder</returns>
         public EetRequestBuilder SetBkp(string val)
-        {// v delphi lze vlozit bkp v textovem tvaru
+        {
             Bkp = EetRegisterRequest.ParseBkp(val);
             return this;
         }
@@ -904,7 +902,7 @@ namespace openeet_lite
         /// <param name="val">The PKP.</param>
         /// <returns></returns>
         public EetRequestBuilder SetPkp(string val)
-        {// v delphi lze vlozit pkp v textovem tvaru
+        {
             Pkp = EetRegisterRequest.ParsePkp(val);
             return this;
         }
@@ -915,7 +913,7 @@ namespace openeet_lite
         /// <param name="p12Filename">The Pkcs12 filename.</param>
         /// <returns>This builder</returns>
         public EetRequestBuilder SetPkcs12(string p12Filename)
-        {// v delphi lze vlozit nazev souboru 'xxxxxx.p12'
+        {
             return SetPkcs12(File.ReadAllBytes(p12Filename));
         }
 
@@ -951,6 +949,5 @@ namespace openeet_lite
         }
 
         #endregion
-
     }
 }

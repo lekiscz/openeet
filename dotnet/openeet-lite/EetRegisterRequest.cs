@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright 2016 Luděk Rašek and other contributors as 
+ * Copyright 2016 Luděk Rašek and other contributors as
  * indicated by the @author tags.
  * Upravil Vlastimil Čoček, Jakub Cermoch
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -106,7 +106,6 @@ namespace openeet_lite
         /// </value>
         public string IdPokl { get; set; }
 
-
         /// <summary>
         /// Gets or sets poradove cislo dokladu.
         /// </summary>
@@ -122,7 +121,6 @@ namespace openeet_lite
         /// Datum provedeni trzby.
         /// </value>
         public DateTime DatTrzby { get; set; } = DateTime.Now;
-
 
         /// <summary>
         /// Gets or sets Celkova castka trzby v Kc.
@@ -346,7 +344,6 @@ namespace openeet_lite
                     Key = new RSACryptoServiceProvider(p);
                     Key.ImportParameters(keyParams);
                 }
-
             }
 
             if (Key == null || Certificate == null) throw new ArgumentException("key and/or certificate still missing after p12 processing");
@@ -537,7 +534,7 @@ namespace openeet_lite
             while ((ln = rd.ReadLine()) != null)
             {
                 string[] fields = ln.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                hashes[fields[1]] = fields[0];
+                hashes[fields[1]] = fields[0].ToLower();
             }
 
             if (!Byte2Hex(SHA1.Create().ComputeHash(templates.template)).ToLower().Equals(hashes["template.xml"]))
@@ -556,7 +553,6 @@ namespace openeet_lite
             SHA256Managed md = new SHA256Managed();
             byte[] digestRaw = md.ComputeHash(Encoding.UTF8.GetBytes(digestTemplate));
             string digest = Convert.ToBase64String(digestRaw);
-
 
             signatureTemplate = ReplacePlaceholders(signatureTemplate, digest, null);
             signatureTemplate = RemoveUnusedPlaceholders(signatureTemplate);
@@ -638,7 +634,6 @@ namespace openeet_lite
             return src;
         }
 
-
         /// <summary>
         /// Sends the request.
         /// </summary>
@@ -660,7 +655,7 @@ namespace openeet_lite
         /// <exception cref="NullReferenceException">When cannot obtain response stream.</exception>
         public string SendRequest(string requestBody, string serviceUrl)
         {
-            //enable minimal versions of TLS required by EET
+            // enable minimal versions of TLS required by EET
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
             byte[] content = Encoding.UTF8.GetBytes(requestBody);
             WebRequest req = WebRequest.Create(serviceUrl);
