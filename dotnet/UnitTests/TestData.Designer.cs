@@ -69,5 +69,15 @@ namespace UnitTests {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] EET_CA1_Playground_CZ1212121218 {
+            get {
+                object obj = ResourceManager.GetObject("EET_CA1_Playground_CZ1212121218", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

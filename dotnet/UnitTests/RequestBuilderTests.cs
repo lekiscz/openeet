@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright 2016 Jakub Cermoch and other contributors as 
+ * Copyright 2016 Jakub Cermoch and other contributors as
  * indicated by the @author tags.
  * Upravil Jakub Cermoch
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,14 +28,14 @@ namespace UnitTests
     public class RequestBuilderTests
     {
         /// <summary>
-        /// Test sets methods.
+        /// Test set methods.
         /// </summary>
         [TestMethod]
         [DeploymentItem("TestData/SomeText.txt")]
         public void SetMethodsTests()
         {
             var dt = DateTime.Now;
-            dt = dt.AddTicks(-(dt.Ticks % TimeSpan.TicksPerSecond)); // remove millisecons
+            dt = dt.AddTicks(-(dt.Ticks % TimeSpan.TicksPerSecond)); // remove milliseconds
             var guid = Guid.NewGuid();
             var bytes = new byte[] { 23, 121, 97, 40, 174, 210, 187, 158, 35, 1, 255, 151, 10, 117, 101, 106, 223, 43, 1, 29 };
             var bytesString = "17796128-AED2BB9E-2301FF97-0A75656A-DF2B011D";
@@ -221,7 +221,7 @@ namespace UnitTests
                 DatTrzby = DateTime.Now,
                 CelkTrzba = 100.0,
                 Rezim = RezimEnum.Standardni,
-                Pkcs12 = TestData._01000003,
+                Pkcs12 = TestData.EET_CA1_Playground_CZ1212121218,
                 Pkcs12Password = "eet",
                 CerpZuct = 1,
                 CestSluz = 2,
@@ -253,7 +253,7 @@ namespace UnitTests
                 DatTrzby = DateTime.Now,
                 CelkTrzba = 100.0,
                 Rezim = RezimEnum.Standardni,
-                Pkcs12 = TestData._01000003,
+                Pkcs12 = TestData.EET_CA1_Playground_CZ1212121218,
                 CerpZuct = 1,
                 CestSluz = 2,
                 Dan1 = 3,

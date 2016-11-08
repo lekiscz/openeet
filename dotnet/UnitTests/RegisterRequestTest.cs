@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright 2016 Jakub Cermoch and other contributors as 
+ * Copyright 2016 Jakub Cermoch and other contributors as
  * indicated by the @author tags.
  * Upravil Jakub Cermoch
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,7 +38,7 @@ namespace UnitTests
             var request = GenerateBasicRequestWithoutCertificate();
 
             PrivateObject obj = new PrivateObject(request);
-            obj.Invoke("LoadP12", TestData._01000003, "eet");
+            obj.Invoke("LoadP12", TestData.EET_CA1_Playground_CZ1212121218, "eet");
             Assert.IsNotNull(request.Key);
         }
 
@@ -49,7 +49,7 @@ namespace UnitTests
             var request = GenerateBasicRequestWithoutCertificate();
 
             PrivateObject obj = new PrivateObject(request);
-            obj.Invoke("LoadP12", TestData._01000003, null);
+            obj.Invoke("LoadP12", TestData.EET_CA1_Playground_CZ1212121218, null);
             Assert.IsNotNull(request.Key);
         }
 
@@ -174,29 +174,28 @@ namespace UnitTests
                 DatTrzby = DateTime.Now,
                 CelkTrzba = 100.0,
                 Rezim = 0,
-                Pkcs12 = TestData._01000003,
+                Pkcs12 = TestData.EET_CA1_Playground_CZ1212121218,
                 Pkcs12Password = "eet"
             }.Build();
 
-            //for receipt printing in online mode
+            // for receipt printing in online mode
             string bkp = request.FormatBkp();
             if (bkp == null) throw new ApplicationException("BKP is null");
 
-            //for receipt printing in offline mode
+            // for receipt printing in offline mode
             string pkp = request.FormatPkp();
             if (pkp == null) throw new ApplicationException("PKP is null");
-            //the receipt can be now stored for offline processing
 
-            //try send
+            // the receipt can be now stored for offline processing
+
+            // try send
             string requestBody = request.GenerateSoapRequest();
             if (requestBody == null) throw new ApplicationException("SOAP request is null");
             string response = await request.SendRequestAsync(requestBody, "https://pg.eet.cz:443/eet/services/EETServiceSOAP/v3");
 
-            // TODO
-            //zde by to chtelo dodelat kontrolu jestli prijata zprava nebyla zmenena, jestli souhlasi podpis zpravy
-            //muzete to nekdo doplnit ?
+            // TODO: zde by to chtelo dodelat kontrolu jestli prijata zprava nebyla zmenena, jestli souhlasi podpis zpravy, muzete to nekdo doplnit?
 
-            //extract FIK
+            // extract FIK
             if (response == null) throw new ApplicationException("response is null");
             if (response.IndexOf("Potvrzeni fik=", StringComparison.Ordinal) < 0) throw new ApplicationException("FIK not found in the response");
         }
@@ -234,7 +233,7 @@ namespace UnitTests
                 DatTrzby = DateTime.Now,
                 CelkTrzba = 100.0,
                 Rezim = 0,
-                Pkcs12 = TestData._01000003,
+                Pkcs12 = TestData.EET_CA1_Playground_CZ1212121218,
                 Pkcs12Password = "eet"
             }.Build();
         }
