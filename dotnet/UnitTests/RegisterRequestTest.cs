@@ -176,7 +176,7 @@ namespace UnitTests
 
         [TestMethod]
         [TestCategory("Online")]
-        public async Task SendRequestTest()
+        public void SendRequestTest()
         {
             EetRegisterRequest request = new EetRequestBuilder()
             {
@@ -204,7 +204,7 @@ namespace UnitTests
             // try send
             string requestBody = request.GenerateSoapRequest();
             if (requestBody == null) throw new ApplicationException("SOAP request is null");
-            string response = await request.SendRequestAsync(requestBody, "https://pg.eet.cz:443/eet/services/EETServiceSOAP/v3");
+            string response = request.SendRequestAsync(requestBody, "https://pg.eet.cz:443/eet/services/EETServiceSOAP/v3").Result;
 
             // TODO: zde by to chtelo dodelat kontrolu jestli prijata zprava nebyla zmenena, jestli souhlasi podpis zpravy, muzete to nekdo doplnit?
 
