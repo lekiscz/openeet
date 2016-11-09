@@ -77,7 +77,7 @@ namespace ConsoleTest
             if (response.IndexOf("Potvrzeni fik=", StringComparison.Ordinal) < 0) throw new ApplicationException("FIK not found in the response");
 
             // ready to print online receipt
-            Console.WriteLine(@"OK!");
+            Console.WriteLine($"OK, Response: {response}!");
         }
 
         public static async Task SignAndSend()
