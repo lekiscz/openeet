@@ -651,9 +651,10 @@ namespace openeet_lite
         /// </summary>
         /// <param name="requestBody">The request body.</param>
         /// <param name="serviceUrl">The service URL.</param>
+        /// <param name="timeout">The length of time, in milliseconds, before the request times out.</param>
         /// <returns></returns>
         /// <exception cref="NullReferenceException">When cannot obtain response stream.</exception>
-        public string SendRequest(string requestBody, string serviceUrl)
+        public string SendRequest(string requestBody, string serviceUrl, int timeout = 100000)
         {
             // enable minimal versions of TLS required by EET
             // this line could be used with .NET 4.5+ target platform, but not with .NET 4.0
@@ -666,6 +667,7 @@ namespace openeet_lite
 
             byte[] content = Encoding.UTF8.GetBytes(requestBody);
             WebRequest req = WebRequest.Create(serviceUrl);
+            req.Timeout = timeout;
             req.ContentType = "text/xml;charset=UTF-8";
             req.ContentLength = content.Length;
             req.Headers.Add("SOAPAction", "http://fs.mfcr.cz/eet/OdeslaniTrzby");
