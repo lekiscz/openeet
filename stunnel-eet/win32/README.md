@@ -37,5 +37,19 @@ In the output you should see lines like this:
 
 When the tunnel is running you can access:
 
-* EET Playground endpoint at `http://localhost:27541/eet/services/EETServiceSOAP/v2`
-* EET Production endpoint at `http://localhost:27542/eet/services/EETServiceSOAP/v2`
+* EET Playground endpoint at `http://localhost:27541/eet/services/EETServiceSOAP/v3`
+* EET Production endpoint at `http://localhost:27542/eet/services/EETServiceSOAP/v3`
+
+# ZIP package
+
+You can use ZIP package containing everything needed to setup Stunnel for EET endpoints
+built by AppVeyor [here](https://ci.appveyor.com/project/lekiscz/openeet/build/artifacts).
+
+# Lekis pro Windows settings
+
+If you want to use this method of connecting to EET endpoints in Lekis pro Windows software,
+you have to change the URL of EET endpoint by using this PowerShell command:
+
+```
+Set-LpWConfigValue -XPath "ExternalServices/EETServiceUrl" -Global -Value "http://localhost:27542/eet/services/EETServiceSOAP/v3"
+```
