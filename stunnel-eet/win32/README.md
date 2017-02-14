@@ -1,52 +1,40 @@
-# stunnel to access EET endpoint
+# Stunnel for EET endpoints
 
-For sources see [stunnel original distribution including sources](https://www.stunnel.org/)
+For sources see [stunnel website](https://stunnel.org/).
 
 For stunnel licensing see LICENSE.md.
 
-This is a subset of official stunnel distribution preconfigured to create tunnel to eet
-endpoint to handle TLS 1.1 requirement on older systems.
+This is a subset of official stunnel distribution preconfigured to create tunnel to EET
+endpoints to handle TLS 1.1 requirement on older systems.
 
 To start tunnel in console window run:
 
 ```
-tstunnel eet.conf
+tstunnel.exe eet.conf
 ```
 
-To start tunnel in background run:
+To install and run tunnel as a Windows service run (admin privs needed) run:
 
 ```
-stunnel -quiet eet.conf
+install.cmd
 ```
 
-To run tunnel as a service run (admin privs needed) following command to install a service:
+It will install the Windows service by using [NSSM tool](http://nssm.cc) and start it.
+
+Use netstat to check if the service listens:
 
 ```
-stunnel -install eet.conf
+netstat.exe -a -o -n | findstr.exe "LISTENING" | findstr.exe "127.0.0.1" | findstr.exe ":2754"
 ```
 
-then start the service (admin privs needed) with:
+In the output you should see lines like this:
 
 ```
-stunnel -start
+ TCP    127.0.0.1:27541        0.0.0.0:0              LISTENING       xxxx
+ TCP    127.0.0.1:27542        0.0.0.0:0              LISTENING       xxxx
 ```
 
-use netstat to check if the service listens:
-
-```
-netstat -a -o -n 
-```
-
-and in the output you should see lines like this (ports depend on your config, PID will differ)
-
-```
- TCP    127.0.0.1:27541        0.0.0.0:0              LISTENING       4144
- TCP    127.0.0.1:27542        0.0.0.0:0              LISTENING       4144
-```
-
-When stunnel is running you can access:
+When the tunnel is running you can access:
 
 * EET Playground endpoint at `http://localhost:27541/eet/services/EETServiceSOAP/v2`
 * EET Production endpoint at `http://localhost:27542/eet/services/EETServiceSOAP/v2`
-
-The port numbers in those URLs depend on "accept" lines in `eet.conf`.
