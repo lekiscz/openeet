@@ -13,7 +13,8 @@ To start tunnel in console window run:
 tstunnel.exe eet.conf
 ```
 
-To install and run tunnel as a Windows service run (admin privs needed) run:
+To install and run tunnel as a Windows service run (admin privs needed, start it by using
+the context menu and Run as Administrator menu item):
 
 ```
 install.cmd
