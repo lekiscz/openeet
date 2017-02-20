@@ -658,12 +658,12 @@ namespace openeet_lite
         {
             // enable minimal versions of TLS required by EET
             // this line could be used with .NET 4.5+ target platform, but not with .NET 4.0
-            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
+            //ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
 
             // enable minimal versions of TLS required by EET
             // .NET 4.0 target platform does not support TLS 1.1 and TLS 1.2 on its own, but it will work with those numerical enum values provided that you have .NET 4.5 installed
             // http://blogs.perficient.com/microsoft/2016/04/tsl-1-2-and-net-support/
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType) 3072 | (SecurityProtocolType) 768;
+            ServicePointManager.SecurityProtocol |= (SecurityProtocolType) 3072 | (SecurityProtocolType) 768;
 
             byte[] content = Encoding.UTF8.GetBytes(requestBody);
             WebRequest req = WebRequest.Create(serviceUrl);
