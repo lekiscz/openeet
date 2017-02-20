@@ -43,10 +43,10 @@ namespace ConsoleTest
             {
                 DicPopl = "CZ1212121218",
                 IdProvoz = "1",
-                IdPokl = "POKLADNA02",
+                IdPokl = "POKLADNA01",
                 PoradCis = "1",
                 DatTrzby = DateTime.Now,
-                CelkTrzba = 200.0,
+                CelkTrzba = 100.0,
                 Rezim = 0,
                 Pkcs12 = TestData.EET_CA1_Playground_CZ1212121218,
                 Pkcs12Password = "eet"
