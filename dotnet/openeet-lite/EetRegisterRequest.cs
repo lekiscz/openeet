@@ -362,7 +362,7 @@ namespace openeet_lite
                 Certificate = cert;
                 Key = (RSACryptoServiceProvider)cert.PrivateKey;
 
-                if (Key.CspKeyContainerInfo.ProviderName != "Microsoft Enhanced RSA and AES Cryptographic Provider")
+                if (Key.CspKeyContainerInfo.ProviderName != "Microsoft Enhanced RSA and AES Cryptographic Provider" && Key.CspKeyContainerInfo.Exportable)
                 {
                     RSACryptoServiceProvider tmpKey = Key;
                     RSAParameters keyParams = tmpKey.ExportParameters(true);
