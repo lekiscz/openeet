@@ -19,6 +19,7 @@
 using System;
 using System.Threading.Tasks;
 using openeet_lite;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ConsoleTest
 {
@@ -39,6 +40,7 @@ namespace ConsoleTest
             //   .SetPkcs12Password("eet")
             //   .Build();
 
+            /* certifikat jako pole byte + heslo
             EetRegisterRequest request = new EetRequestBuilder()
             {
                 DicPopl = "CZ1212121218",
@@ -51,6 +53,24 @@ namespace ConsoleTest
                 Pkcs12 = TestData.EET_CA1_Playground_CZ1212121218,
                 Pkcs12Password = "eet"
             }.Build();
+
+            */
+
+            // certifikat jako X509Certificate2
+            var cert = new X509Certificate2("data\\EET_CA1_Playground-CZ1212121218.p12","eet",X509KeyStorageFlags.Exportable);
+
+            var request = new EetRequestBuilder()
+            {
+                DicPopl = "CZ1212121218",
+                IdProvoz = "1",
+                IdPokl = "POKLADNA01",
+                PoradCis = "1",
+                DatTrzby = DateTime.Now,
+                CelkTrzba = 100.0,
+                Rezim = 0,
+                Certificate = cert
+            }.Build();
+
 
             // for receipt printing in online mode
             string bkp = request.FormatBkp();

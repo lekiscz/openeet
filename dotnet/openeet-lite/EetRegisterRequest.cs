@@ -303,7 +303,9 @@ namespace openeet_lite
             Key = eetRequestBuilder.Key;
             Certificate = eetRequestBuilder.Certificate;
 
-            LoadP12(eetRequestBuilder.Pkcs12, eetRequestBuilder.Pkcs12Password);
+            if (Certificate == null)
+                LoadP12(eetRequestBuilder.Pkcs12, eetRequestBuilder.Pkcs12Password);
+            else LoadP12(Certificate);
 
             ComputeCodes(Key);
         }
@@ -344,6 +346,25 @@ namespace openeet_lite
                     Key = new RSACryptoServiceProvider(p);
                     Key.ImportParameters(keyParams);
                 }
+            }
+
+            if (Key == null || Certificate == null) throw new ArgumentException("key and/or certificate still missing after p12 processing");
+        }
+
+        /// <summary>
+        /// Loads Certificate
+        /// </summary>
+        /// <param name="cert"></param>
+        private void LoadP12(X509Certificate2 cert)
+        {
+            if (cert.HasPrivateKey)
+            {
+                Certificate = cert;
+                RSACryptoServiceProvider tmpKey = (RSACryptoServiceProvider)cert.PrivateKey;
+                RSAParameters keyParams = tmpKey.ExportParameters(true);
+                CspParameters p = new CspParameters { ProviderName = "Microsoft Enhanced RSA and AES Cryptographic Provider" };
+                Key = new RSACryptoServiceProvider(p);
+                Key.ImportParameters(keyParams);
             }
 
             if (Key == null || Certificate == null) throw new ArgumentException("key and/or certificate still missing after p12 processing");
