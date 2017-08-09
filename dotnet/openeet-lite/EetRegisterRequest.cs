@@ -360,11 +360,16 @@ namespace openeet_lite
             if (cert.HasPrivateKey)
             {
                 Certificate = cert;
-                RSACryptoServiceProvider tmpKey = (RSACryptoServiceProvider)cert.PrivateKey;
-                RSAParameters keyParams = tmpKey.ExportParameters(true);
-                CspParameters p = new CspParameters { ProviderName = "Microsoft Enhanced RSA and AES Cryptographic Provider" };
-                Key = new RSACryptoServiceProvider(p);
-                Key.ImportParameters(keyParams);
+                Key = (RSACryptoServiceProvider)cert.PrivateKey;
+
+                if (Key.CspKeyContainerInfo.ProviderName != "Microsoft Enhanced RSA and AES Cryptographic Provider")
+                {
+                    RSACryptoServiceProvider tmpKey = Key;
+                    RSAParameters keyParams = tmpKey.ExportParameters(true);
+                    CspParameters p = new CspParameters { ProviderName = "Microsoft Enhanced RSA and AES Cryptographic Provider" };
+                    Key = new RSACryptoServiceProvider(p);
+                    Key.ImportParameters(keyParams);
+                }
             }
 
             if (Key == null || Certificate == null) throw new ArgumentException("key and/or certificate still missing after p12 processing");

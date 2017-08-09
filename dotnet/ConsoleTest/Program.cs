@@ -57,7 +57,10 @@ namespace ConsoleTest
             */
 
             // certifikat jako X509Certificate2
-            var cert = new X509Certificate2("data\\EET_CA1_Playground-CZ1212121218.p12","eet",X509KeyStorageFlags.Exportable);
+            //var cert = new X509Certificate2("data\\EET_CA1_Playground-CZ683555118.pfx", "eet");
+
+            // certifikat jako X509Certificate2
+            var cert = new X509Certificate2("data\\EET_CA1_Playground-CZ1212121218.p12", "eet", X509KeyStorageFlags.Exportable);
 
             var request = new EetRequestBuilder()
             {
